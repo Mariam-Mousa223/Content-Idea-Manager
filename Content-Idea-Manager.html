@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Idea Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Content-Idea-Manager.css">
+</head>
+<body>
+
+    <div class="app-layout">
+        <!-- Sidebar Form -->
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand-icon">💡</span>
+                <h2>Idea<span>Flow</span></h2>
+            </div>
+
+            <form id="ideaForm" class="form-card" onsubmit="event.preventDefault();">
+                <h3 id="formTitle">Add Content Idea</h3>
+                
+                <div class="input-group">
+                    <label for="titleInput">Idea Title:</label>
+                    <input type="text" id="titleInput" placeholder="e.g., Top 10 CSS Tricks" required>
+                </div>
+
+                <!-- Custom Type Select -->
+                <div class="input-group">
+                    <label>Content Type:</label>
+                    <div class="custom-dropdown" id="dropdownType">
+                        <div class="dropdown-selected" onclick="toggleDropdown('dropdownType')">
+                            <span id="selectedTypeVal">🎥 Video</span>
+                            <span class="arrow">▾</span>
+                        </div>
+                        <div class="dropdown-options">
+                            <div class="option-item option-video" onclick="selectOption('dropdownType', 'Video', '🎥 Video')">🎥 Video</div>
+                            <div class="option-item option-blog" onclick="selectOption('dropdownType', 'Blog', '✍️ Blog')">✍️ Blog</div>
+                            <div class="option-item option-post" onclick="selectOption('dropdownType', 'Post', '📱 Post')">📱 Post</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Status Select -->
+                <div class="input-group">
+                    <label>Status:</label>
+                    <div class="custom-dropdown" id="dropdownStatus">
+                        <div class="dropdown-selected" onclick="toggleDropdown('dropdownStatus')">
+                            <span id="selectedStatusVal">📝 Draft</span>
+                            <span class="arrow">▾</span>
+                        </div>
+                        <div class="dropdown-options">
+                            <div class="option-item option-draft" onclick="selectOption('dropdownStatus', 'Draft', '📝 Draft')">📝 Draft</div>
+                            <div class="option-item option-published" onclick="selectOption('dropdownStatus', 'Published', '🚀 Published')">🚀 Published</div>
+                            <div class="option-item option-archived" onclick="selectOption('dropdownStatus', 'Archived', '📦 Archived')">📦 Archived</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="descInput">Description / Notes (Optional):</label>
+                    <textarea id="descInput" placeholder="Outline your thoughts..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="saveBtn" class="btn-primary">
+                        <span id="saveBtnText">Save Idea</span>
+                    </button>
+                    <button type="button" id="cancelBtn" class="btn-secondary hidden">Cancel</button>
+                </div>
+            </form>
+        </aside>
+
+        <!-- Main Display Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="filters-wrapper">
+                    <div class="filter-box">
+                        <input type="text" id="searchInput" placeholder="🔍 Search ideas..." class="search-input">
+                    </div>
+
+                    <!-- Filter Type -->
+                    <div class="filter-box">
+                        <label>Type:</label>
+                        <div class="custom-dropdown small-dd" id="filterDropdownType">
+                            <div class="dropdown-selected" onclick="toggleDropdown('filterDropdownType')">
+                                <span id="filterTypeVal">All Types</span>
+                                <span class="arrow">▾</span>
+                            </div>
+                            <div class="dropdown-options">
+                                <div class="option-item" onclick="selectFilterOption('filterDropdownType', 'All', 'All Types')">All Types</div>
+                                <div class="option-item option-video" onclick="selectFilterOption('filterDropdownType', 'Video', 'Video')">Video</div>
+                                <div class="option-item option-blog" onclick="selectFilterOption('filterDropdownType', 'Blog', 'Blog')">Blog</div>
+                                <div class="option-item option-post" onclick="selectFilterOption('filterDropdownType', 'Post', 'Post')">Post</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Status -->
+                    <div class="filter-box">
+                        <label>Status:</label>
+                        <div class="custom-dropdown small-dd" id="filterDropdownStatus">
+                            <div class="dropdown-selected" onclick="toggleDropdown('filterDropdownStatus')">
+                                <span id="filterStatusVal">All Statuses</span>
+                                <span class="arrow">▾</span>
+                            </div>
+                            <div class="dropdown-options">
+                                <div class="option-item" onclick="selectFilterOption('filterDropdownStatus', 'All', 'All Statuses')">All Statuses</div>
+                                <div class="option-item option-draft" onclick="selectFilterOption('filterDropdownStatus', 'Draft', 'Draft')">Draft</div>
+                                <div class="option-item option-published" onclick="selectFilterOption('filterDropdownStatus', 'Published', 'Published')">Published</div>
+                                <div class="option-item option-archived" onclick="selectFilterOption('filterDropdownStatus', 'Archived', 'Archived')">Archived</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-badge">
+                    <span id="ideaCount">0</span> Ideas
+                </div>
+            </header>
+
+            <div id="ideasList" class="ideas-grid"></div>
+        </main>
+    </div>
+
+    <script src="Content-Idea-Manager.js"></script>
+</body>
+</html>
