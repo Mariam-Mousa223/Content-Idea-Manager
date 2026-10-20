@@ -328,3 +328,30 @@ button {
 
 .btn-delete { background: rgba(239, 68, 68, 0.15); color: #f87171; }
 .btn-delete:hover { background: rgba(239, 68, 68, 0.3); }
+
+
+.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 0px;
+    color: #f59e0b;
+    text-decoration: none;
+    font-weight: 600;
+    
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+.back-link::before {
+  content: "← "; 
+  margin-right: 6px; 
+  display: inline-block;
+  transition: transform 0.2s ease; 
+}
+
+
+.back-link:hover::before {
+  transform: translateX(-4px); 
+}
+
